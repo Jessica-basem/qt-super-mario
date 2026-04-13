@@ -28,9 +28,12 @@ void Player::updateState() {
   velocityY += 1;
   onGround = false;
   moveBy(0, velocityY);
-if (y() > 400 && !lostShown) {
-    lostShown = true;
-    QMessageBox::information(nullptr, "Game Over", "You lost!");
+if(y() > 400 && !gameOver){
+    gameOver = true;
+    QMessageBox* messageBox = new QMessageBox;
+    messageBox->setWindowTitle("Game Over");
+    messageBox->setText("You lost!");
+    messageBox->exec();
 }
 
   QList<QGraphicsItem*> items = collidingItems();
